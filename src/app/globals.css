@@ -41,6 +41,11 @@
   --color-neutral-1200: #202020;
 }
 
+::selection {
+  color: var(--color-neutral-1200);
+  background-color: var(--color-accent-1000);
+}
+
 .capped-text-heading {
   font-size: 40px;
   line-height: 44px;
