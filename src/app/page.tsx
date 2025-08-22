@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 
 export default function Home() {
   return (
-    <div className="container max-w-[980px] mx-auto pt-[180px]">
+    <div className="container px-4 max-w-[980px] mx-auto pt-[180px]">
       <motion.h1
         className="font-semibold capped-text-heading tracking-tighter text-neutral-1200"
         style={{ width: "max-content" }}
