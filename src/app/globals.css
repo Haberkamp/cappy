@@ -1,5 +1,42 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Font family */
   --font-sans: var(--font-inter);
+
+  /* Tracking */
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.02rem;
+  --tracking-normal: 0;
+
+  /* Below line, removes every default tailwind color */
+  --color-*: initial;
+
+  /* Accent colors */
+  --color-accent-100: #fefcfb;
+  --color-accent-200: #fff5f1;
+  --color-accent-300: #ffe8de;
+  --color-accent-400: #ffd7c7;
+  --color-accent-500: #ffc9b4;
+  --color-accent-600: #ffb89f;
+  --color-accent-700: #ffa284;
+  --color-accent-800: #fb8765;
+  --color-accent-900: #ff4f00;
+  --color-accent-1000: #f14000;
+  --color-accent-1100: #de3500;
+  --color-accent-1200: #5d291a;
+
+  /* Neutral colors */
+  --color-neutral-100: #fdfdfd;
+  --color-neutral-200: #f9f9f9;
+  --color-neutral-300: #f0f0f0;
+  --color-neutral-400: #e8e8e8;
+  --color-neutral-500: #e1e1e1;
+  --color-neutral-600: #d9d9d9;
+  --color-neutral-700: #cecece;
+  --color-neutral-800: #bbb;
+  --color-neutral-900: #8c8c8c;
+  --color-neutral-1000: #828282;
+  --color-neutral-1100: #626262;
+  --color-neutral-1200: #202020;
 }
