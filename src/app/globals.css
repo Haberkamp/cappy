@@ -40,3 +40,37 @@
   --color-neutral-1100: #626262;
   --color-neutral-1200: #202020;
 }
+
+.capped-text-heading {
+  font-size: 40px;
+  line-height: 44px;
+}
+
+.capped-text-heading::before {
+  content: "";
+  margin-bottom: -0.1862em;
+  display: table;
+}
+
+.capped-text-heading::after {
+  content: "";
+  margin-top: -0.1862em;
+  display: table;
+}
+
+.capped-text-subheading {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.capped-text-subheading::before {
+  content: "";
+  margin-bottom: -0.2862em;
+  display: table;
+}
+
+.capped-text-subheading::after {
+  content: "";
+  margin-top: -0.2862em;
+  display: table;
+}
