@@ -12,7 +12,7 @@ export default function Home() {
         <motion.span
           initial={{ opacity: 0, filter: "blur(4px)", scale: 0.98 }}
           animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           style={{ display: "inline-block" }}
         >
           Upload video.
@@ -20,7 +20,7 @@ export default function Home() {
         <motion.span
           initial={{ opacity: 0, filter: "blur(4px)", scale: 0.98 }}
           animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
           style={{ display: "inline-block" }}
         >
           Download captions.
@@ -32,7 +32,7 @@ export default function Home() {
       <motion.p
         initial={{ opacity: 0, filter: "blur(4px)", scale: 0.99 }}
         animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
+        transition={{ duration: 0.5, delay: 1 }}
         className="font-semibold capped-text-subheading tracking-tight text-neutral-900"
         style={{ width: "max-content" }}
       >
