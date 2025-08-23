@@ -55,7 +55,7 @@ export default function Home() {
           <div className="pt-6"></div>
 
           <button
-            className="text-white bg-black flex items-center gap-2 px-6 min-h-11 rounded-lg focus-visible:outline-accent-900 outline-offset-2 outline-2 cursor-pointer select-none"
+            className="text-white bg-neutral-1200 hover:bg-neutral-1100 transition-colors ease-(--ease-out-quint) duration-200 flex items-center gap-2 px-6 min-h-11 rounded-lg focus-visible:outline-accent-900 outline-offset-2 outline-2 cursor-pointer select-none"
             type="button"
           >
             <svg
