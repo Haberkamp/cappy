@@ -21,7 +21,9 @@ type Props = {
 export default function RootLayout({ children }: Readonly<Props>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} antialiased bg-neutral-200`}>
+        {children}
+      </body>
     </html>
   );
 }
