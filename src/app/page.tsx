@@ -1,8 +1,44 @@
 "use client";
 
 import { motion } from "motion/react";
+import {
+  transcribe,
+  canUseWhisperWeb,
+  resampleTo16Khz,
+  downloadWhisperModel,
+} from "@remotion/whisper-web";
+import { useEffect, useState } from "react";
+
+const modelToUse = "tiny.en";
 
 export default function Home() {
+  const [downloadProgress, setDownloadProgress] = useState<number | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    const downloadModel = async () => {
+      const { supported: doesSupportWhisper, detailedReason } =
+        await canUseWhisperWeb(modelToUse);
+
+      if (!doesSupportWhisper) {
+        throw new Error(
+          "Failed to download AI model; The browser does not support downloading the model. Reason: " +
+            detailedReason
+        );
+      }
+
+      downloadWhisperModel({
+        model: modelToUse,
+        onProgress: ({ progress }) => {
+          setDownloadProgress(Math.round(progress * 100));
+        },
+      });
+    };
+
+    downloadModel();
+  }, []);
+
   return (
     <div className="container px-4 max-w-[980px] mx-auto py-16 md:py-32 lg:py-[180px]">
       <motion.h1 className="font-semibold capped-text-heading tracking-tighter text-neutral-1200 w-auto">
@@ -41,40 +77,55 @@ export default function Home() {
         initial={{ opacity: 0, filter: "blur(4px)", scale: 0.99, y: 10 }}
         animate={{ opacity: 1, filter: "blur(0px)", scale: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 1.6 }}
-        className="border border-neutral-600 w-full min-h-[400px] rounded-2xl bg-neutral-100 grid place-items-center px-8"
-        style={{ boxShadow: "0 0 7px 0 rgba(0, 0, 0, 0.05)" }}
+        className="relative"
       >
-        <div className="flex flex-col items-center">
-          <p className="text-center font-semibold capped-text-subheading text-neutral-1200 tracking-tight text-balance">
-            Drag and drop a file to create captions
-          </p>
+        <motion.div
+          className="border border-neutral-600 w-full min-h-[400px] rounded-2xl bg-neutral-100 grid place-items-center px-8"
+          style={{ boxShadow: "0 0 7px 0 rgba(0, 0, 0, 0.05)" }}
+        >
+          <div className="flex flex-col items-center">
+            <p className="text-center font-semibold capped-text-subheading text-neutral-1200 tracking-tight text-balance">
+              Drag and drop a file to create captions
+            </p>
 
-          <div className="pt-4"></div>
+            <div className="pt-4"></div>
 
-          <p className="text-center capped-text-body text-neutral-900 text-balance">
-            You can upload a .mp3, .mp4, .wav and .mov file.
-          </p>
+            <p className="text-center capped-text-body text-neutral-900 text-balance">
+              You can upload a .mp3, .mp4, .wav and .mov file.
+            </p>
 
-          <div className="pt-6"></div>
+            <div className="pt-6"></div>
 
-          <button
-            className="text-white bg-neutral-1200 hover:bg-neutral-1100 transition-colors ease-(--ease-out-quint) duration-200 flex items-center gap-2 px-6 min-h-11 rounded-lg focus-visible:outline-accent-900 outline-offset-2 outline-2 cursor-pointer select-none"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              fill="currentColor"
-              viewBox="0 0 256 256"
-              style={{ width: "18px", height: "18px" }}
+            <button
+              className="text-white bg-neutral-1200 hover:bg-neutral-1100 transition-colors ease-(--ease-out-quint) duration-200 flex items-center gap-2 px-6 min-h-11 rounded-lg focus-visible:outline-accent-900 outline-offset-2 outline-2 cursor-pointer select-none"
+              type="button"
             >
-              <path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0ZM93.66,77.66,120,51.31V144a8,8,0,0,0,16,0V51.31l26.34,26.35a8,8,0,0,0,11.32-11.32l-40-40a8,8,0,0,0-11.32,0l-40,40A8,8,0,0,0,93.66,77.66Z"></path>
-            </svg>
+              <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                style={{ width: "18px", height: "18px" }}
+              >
+                <path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0ZM93.66,77.66,120,51.31V144a8,8,0,0,0,16,0V51.31l26.34,26.35a8,8,0,0,0,11.32-11.32l-40-40a8,8,0,0,0-11.32,0l-40,40A8,8,0,0,0,93.66,77.66Z"></path>
+              </svg>
 
-            <span>Upload file</span>
-          </button>
+              <span>Upload file</span>
+            </button>
+          </div>
+        </motion.div>
+
+        <div
+          className="absolute left-1/2 -translate-x-1/2 top-[100%] w-9/10 bg-neutral-400 border border-t-0 border-neutral-600 rounded-b-lg py-3 px-3 flex items-center justify-between"
+          style={{ boxShadow: "0 2px 3px rgba(0, 0, 0, 0.05)" }}
+        >
+          {typeof downloadProgress === "number" ? (
+            <p className="capped-text-body text-neutral-1200 tabular-nums">
+              Downloading AI: {downloadProgress}%
+            </p>
+          ) : null}
         </div>
       </motion.div>
     </div>
