@@ -37,7 +37,10 @@ export default function Home() {
 
       <div className="pt-16"></div>
 
-      <div
+      <motion.div
+        initial={{ opacity: 0, filter: "blur(4px)", scale: 0.99, y: 10 }}
+        animate={{ opacity: 1, filter: "blur(0px)", scale: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 1.6 }}
         className="border border-neutral-600 w-full min-h-[400px] rounded-2xl bg-neutral-100 grid place-items-center px-8"
         style={{ boxShadow: "0 0 7px 0 rgba(0, 0, 0, 0.05)" }}
       >
@@ -73,7 +76,7 @@ export default function Home() {
             <span>Upload file</span>
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
