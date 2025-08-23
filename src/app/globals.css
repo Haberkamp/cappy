@@ -82,3 +82,20 @@
   margin-top: -0.2862em;
   display: table;
 }
+
+.capped-text-body {
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.capped-text-body::before {
+  content: "";
+  margin-bottom: -0.3094em;
+  display: table;
+}
+
+.capped-text-body::after {
+  content: "";
+  margin-top: -0.3368em;
+  display: table;
+}
