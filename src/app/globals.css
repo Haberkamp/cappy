@@ -39,6 +39,9 @@
   --color-neutral-1000: #828282;
   --color-neutral-1100: #626262;
   --color-neutral-1200: #202020;
+
+  --color-white: #fff;
+  --color-black: #000;
 }
 
 ::selection {
