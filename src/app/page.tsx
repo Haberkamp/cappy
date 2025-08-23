@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 
 export default function Home() {
   return (
-    <div className="container px-4 max-w-[980px] mx-auto pt-[180px]">
+    <div className="container px-4 max-w-[980px] mx-auto py-16 md:py-32 lg:py-[180px]">
       <motion.h1 className="font-semibold capped-text-heading tracking-tighter text-neutral-1200 w-auto">
         <motion.span
           initial={{ opacity: 0, filter: "blur(4px)", scale: 0.98 }}
