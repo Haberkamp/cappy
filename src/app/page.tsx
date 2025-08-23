@@ -147,7 +147,13 @@ export default function Home() {
                 }}
               >
                 <Button
-                  className="text-white bg-neutral-1200 hover:bg-neutral-1100 transition-colors ease-(--ease-out-quint) duration-200 flex items-center gap-2 px-6 min-h-11 rounded-lg focus-visible:outline-accent-900 outline-offset-2 outline-2 cursor-pointer select-none"
+                  className={({ isFocusVisible, isHovered }) =>
+                    "text-white transition-colors ease-(--ease-out-quint) duration-200 flex items-center gap-2 px-6 min-h-11 rounded-lg focus-visible:outline-accent-900 outline-offset-2 outline-2 cursor-pointer select-none" +
+                    (isFocusVisible
+                      ? " outline-2 outline-accent-900 outline-offset-2"
+                      : "") +
+                    (isHovered ? " bg-neutral-1100" : " bg-neutral-1200")
+                  }
                   type="button"
                 >
                   <svg
