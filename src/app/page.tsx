@@ -169,8 +169,18 @@ export default function Home() {
           )}
         </MotionDropZone>
 
-        <div
-          className="z-10 absolute left-1/2 -translate-x-1/2 top-[100%] w-9/10 bg-neutral-400 border border-t-0 border-neutral-600 rounded-b-lg py-3 px-3 flex items-center justify-between"
+        <motion.div
+          initial={{ y: -36 }}
+          animate={{ y: 0 }}
+          transition={{
+            duration: 0.5,
+            delay: 2.4,
+            type: "spring",
+            mass: 0.5,
+            damping: 19.8,
+            stiffness: 400,
+          }}
+          className="flex items-center h-[36px] z-10 absolute left-1/2 -translate-x-1/2 top-[100%] w-9/10 bg-neutral-400 border border-t-0 border-neutral-600 rounded-b-lg py-3 px-3 flex items-center justify-between"
           style={{ boxShadow: "0 2px 3px rgba(0, 0, 0, 0.05)" }}
         >
           {typeof downloadProgress === "number" ? (
@@ -178,7 +188,7 @@ export default function Home() {
               Downloading AI: {downloadProgress}%
             </p>
           ) : null}
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   );
