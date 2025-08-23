@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@remotion/whisper-web':
+        specifier: 4.0.340
+        version: 4.0.340
       motion:
         specifier: ^12.23.12
         version: 12.23.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -336,6 +339,12 @@ packages:
   '@nolyfill/is-core-module@1.0.39':
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
+
+  '@remotion/captions@4.0.340':
+    resolution: {integrity: sha512-BiHn1cfZxmke7nl+OCDNzQngV9Kc+jX/EtSrk4AcpPeeH1BFomNaCuYWWMDnOA1FP7z/uBvUceSiYdn4NlS+ew==}
+
+  '@remotion/whisper-web@4.0.340':
+    resolution: {integrity: sha512-tOrR/I3C92ocCk5GrSpArVUC9z95Tn7M3MvkrLC1a7MXt5kLbORNF17u8R7SoRU4t7x604SWCMQj+4UODgtIBQ==}
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
@@ -2070,6 +2079,12 @@ snapshots:
       fastq: 1.19.1
 
   '@nolyfill/is-core-module@1.0.39': {}
+
+  '@remotion/captions@4.0.340': {}
+
+  '@remotion/whisper-web@4.0.340':
+    dependencies:
+      '@remotion/captions': 4.0.340
 
   '@rtsao/scc@1.1.0': {}
 
