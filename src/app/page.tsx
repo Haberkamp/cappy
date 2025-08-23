@@ -8,7 +8,7 @@ import {
   downloadWhisperModel,
 } from "@remotion/whisper-web";
 import { useEffect, useState } from "react";
-import { Button, DropZone, FileTrigger } from "react-aria-components";
+import { Button, DropZone, FileTrigger, Text } from "react-aria-components";
 
 const modelToUse = "tiny.en";
 
@@ -110,14 +110,15 @@ export default function Home() {
         >
           {({ isDropTarget }) => (
             <div className="flex flex-col items-center">
-              <p
+              <Text
+                slot="label"
                 className={
                   "text-center font-semibold capped-text-subheading tracking-tight text-balance " +
                   (isDropTarget ? " text-accent-1200" : "text-neutral-1200")
                 }
               >
                 Drag and drop a file to create captions
-              </p>
+              </Text>
 
               <div className="pt-4"></div>
 
