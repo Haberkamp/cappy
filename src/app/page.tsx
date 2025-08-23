@@ -30,7 +30,7 @@ export default function Home() {
         initial={{ opacity: 0, filter: "blur(4px)", scale: 0.99 }}
         animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
         transition={{ duration: 0.5, delay: 1 }}
-        className="font-semibold capped-text-subheading tracking-tight text-neutral-900 w-auto text-balance"
+        className="font-semibold capped-text-subheading tracking-tight text-neutral-900 w-fit text-balance"
       >
         Transcribe and create captions for your videos.
       </motion.p>
