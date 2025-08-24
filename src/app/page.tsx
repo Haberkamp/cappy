@@ -10,7 +10,13 @@ import {
 } from "@remotion/whisper-web";
 import { serializeSrt } from "@remotion/captions";
 import { useEffect, useState } from "react";
-import { Button, DropZone, FileTrigger, Text } from "react-aria-components";
+import {
+  Button,
+  DropZone,
+  FileTrigger,
+  Link,
+  Text,
+} from "react-aria-components";
 import FileItem from "../components/FileItem";
 
 const modelToUse = "tiny.en";
@@ -325,6 +331,27 @@ export default function Home() {
           ) : null}
         </motion.div>
       </motion.div>
+
+      <motion.p
+        className="text-center capped-text-body text-neutral-900 pt-16"
+        initial={{ opacity: 0, filter: "blur(4px)", scale: 0.99 }}
+        animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+        transition={{ duration: 0.5, delay: 2.8 }}
+      >
+        Built by{" "}
+        <Link
+          href="https://www.haberkamp.dev"
+          className={({ isFocusVisible, isHovered }) =>
+            " " +
+            (isFocusVisible
+              ? "outline-2 outline-accent-900 outline-offset-2 rounded-sm "
+              : "") +
+            (isHovered ? " text-accent-900" : "underline")
+          }
+        >
+          Nils Haberkamp
+        </Link>
+      </motion.p>
     </div>
   );
 }
