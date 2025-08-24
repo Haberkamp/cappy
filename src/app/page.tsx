@@ -312,7 +312,7 @@ export default function Home() {
             <Button
               onClick={createCaptions}
               className={({ isFocusVisible, isHovered }) =>
-                " w-full sm:w-auto transition-colors ease-(--ease-out-quint) duration-200 capped-text-body text-neutral-100 min-h-8 px-3 rounded-md display-inline-flex items-center justify-center cursor-pointer " +
+                " w-full sm:w-auto select-none transition-colors ease-(--ease-out-quint) duration-200 capped-text-body text-neutral-100 min-h-8 px-3 rounded-md display-inline-flex items-center justify-center cursor-pointer " +
                 (isFocusVisible
                   ? " outline-2 outline-accent-900 outline-offset-2"
                   : "") +
