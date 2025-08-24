@@ -299,7 +299,7 @@ export default function Home() {
             damping: 19.8,
             stiffness: 400,
           }}
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 py-4 sm:py-0 sm:h-[46px] z-10 absolute left-1/2 -translate-x-1/2 top-[100%] w-9/10 bg-neutral-300 border border-t-0 border-neutral-600 rounded-b-lg px-3 flex items-center justify-between"
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 py-4 sm:py-0 sm:h-[46px] z-10 relative left-1/2 -translate-x-1/2 top-[100%] w-9/10 bg-neutral-300 border border-t-0 border-neutral-600 rounded-b-lg px-3 flex items-center justify-between"
           style={{ boxShadow: "0 2px 3px rgba(0, 0, 0, 0.05)" }}
         >
           {typeof downloadProgress === "number" ? (
