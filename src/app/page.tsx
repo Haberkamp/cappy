@@ -241,10 +241,10 @@ export default function Home() {
           </MotionDropZone>
         ) : (
           <div
-            className="relative z-20 border border-neutral-600 bg-neutral-100 w-full min-h-[400px] rounded-2xl grid place-items-center px-8"
+            className="relative z-20 border border-neutral-600 bg-neutral-100 w-full min-h-[400px] rounded-2xl grid place-items-center px-8 py-20"
             style={{ boxShadow: "0 0 7px 0 rgba(0, 0, 0, 0.05)" }}
           >
-            <div className="flex items-center gap-20">
+            <div className="flex flex-col md:flex-row items-center gap-x-20 gap-y-12">
               <FileItem
                 fileName={file.name.replace(/\.[^/.]+$/, "")}
                 secondaryInformation={`${(file.size / 1024).toFixed(1)} kB`}
@@ -258,9 +258,21 @@ export default function Home() {
                 fill="currentColor"
                 viewBox="0 0 256 256"
                 aria-hidden="true"
-                className="text-neutral-1200"
+                className="text-neutral-1200 hidden md:block"
               >
                 <path d="M224.49,136.49l-72,72a12,12,0,0,1-17-17L187,140H40a12,12,0,0,1,0-24H187L135.51,64.48a12,12,0,0,1,17-17l72,72A12,12,0,0,1,224.49,136.49Z"></path>
+              </svg>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+                aria-hidden="true"
+                className="text-neutral-1200 md:hidden"
+              >
+                <path d="M208.49,152.49l-72,72a12,12,0,0,1-17,0l-72-72a12,12,0,0,1,17-17L116,187V40a12,12,0,0,1,24,0V187l51.51-51.52a12,12,0,0,1,17,17Z"></path>
               </svg>
 
               <FileItem
@@ -287,11 +299,11 @@ export default function Home() {
             damping: 19.8,
             stiffness: 400,
           }}
-          className="flex items-center h-[46px] z-10 absolute left-1/2 -translate-x-1/2 top-[100%] w-9/10 bg-neutral-300 border border-t-0 border-neutral-600 rounded-b-lg px-3 flex items-center justify-between"
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-y-3 py-4 sm:py-0 sm:h-[46px] z-10 absolute left-1/2 -translate-x-1/2 top-[100%] w-9/10 bg-neutral-300 border border-t-0 border-neutral-600 rounded-b-lg px-3 flex items-center justify-between"
           style={{ boxShadow: "0 2px 3px rgba(0, 0, 0, 0.05)" }}
         >
           {typeof downloadProgress === "number" ? (
-            <p className="ml-2 capped-text-body text-neutral-1200 tabular-nums">
+            <p className="md:ml-2 capped-text-body text-neutral-1200 tabular-nums">
               Downloading AI: {downloadProgress}%
             </p>
           ) : null}
@@ -300,7 +312,7 @@ export default function Home() {
             <Button
               onClick={createCaptions}
               className={({ isFocusVisible, isHovered }) =>
-                " transition-colors ease-(--ease-out-quint) duration-200 capped-text-body text-neutral-100 min-h-8 px-3 rounded-md display-inline-flex items-center justify-center cursor-pointer " +
+                " w-full sm:w-auto transition-colors ease-(--ease-out-quint) duration-200 capped-text-body text-neutral-100 min-h-8 px-3 rounded-md display-inline-flex items-center justify-center cursor-pointer " +
                 (isFocusVisible
                   ? " outline-2 outline-accent-900 outline-offset-2"
                   : "") +
