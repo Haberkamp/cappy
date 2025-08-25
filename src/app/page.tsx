@@ -64,10 +64,37 @@ export default function Home() {
     number | undefined
   >(undefined);
 
+  const [state, setState] = useState<"initial" | "in-progress" | "finished">(
+    "initial"
+  );
+
+  const [transcribedFile, setTranscribedFile] = useState<undefined | Blob>(
+    undefined
+  );
+
   const [file, setFile] = useState<File | undefined>(undefined);
+
+  function downloadFile(blob: undefined | Blob, fileName: string) {
+    if (!blob)
+      throw new Error("Failed to create download file; File does not exist");
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName.replace(/\.[^/.]+$/, "") + ".srt";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
+  }
 
   async function createCaptions() {
     if (!file) throw new Error("Failed to create captions; No file selected.");
+
+    setState("in-progress");
 
     const channelWaveform = await resampleTo16Khz({
       file,
@@ -91,18 +118,12 @@ export default function Home() {
 
     const srt = serializeSrt({ lines });
 
-    const blob = new Blob([srt], { type: "text/srt" });
-    const url = URL.createObjectURL(blob);
+    setState("finished");
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = file.name.replace(/\.[^/.]+$/, "") + ".srt";
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }, 100);
+    const blob = new Blob([srt], { type: "text/srt" });
+    setTranscribedFile(blob);
+
+    downloadFile(blob, file.name);
   }
 
   return (
@@ -316,15 +337,28 @@ export default function Home() {
 
           {file ? (
             <Button
-              onClick={createCaptions}
+              onClick={() => {
+                if (state === "initial") {
+                  createCaptions();
+                  return;
+                }
+
+                if (!file)
+                  throw new Error(
+                    "Failed to re-download file. File does not exist"
+                  );
+
+                downloadFile(transcribedFile, file.name);
+              }}
               className={({ isFocusVisible, isHovered }) =>
-                " w-full sm:w-auto select-none transition-colors ease-(--ease-out-quint) duration-200 capped-text-body text-neutral-100 min-h-8 px-3 rounded-md display-inline-flex items-center justify-center cursor-pointer " +
+                " w-full disabled:bg-neutral-1000 disabled:cursor-not-allowed sm:w-auto select-none transition-colors ease-(--ease-out-quint) duration-200 capped-text-body text-neutral-100 min-h-8 px-3 rounded-md display-inline-flex items-center justify-center cursor-pointer " +
                 (isFocusVisible
                   ? " outline-2 outline-accent-900 outline-offset-2"
                   : "") +
                 (isHovered ? " bg-neutral-1100" : " bg-neutral-1200")
               }
               type="button"
+              isDisabled={state === "in-progress"}
             >
               Create captions
             </Button>
