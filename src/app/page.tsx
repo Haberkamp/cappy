@@ -347,7 +347,13 @@ export default function Home() {
                 isOpen={showTooltip}
                 onOpenChange={(isOpen) => setShowTooltip(isOpen)}
               >
-                <Button className="flex rounded-full outline-accent-900 focus-visible:outline-2 cursor-pointer w-6 h-6 grid place-items-center">
+                <Button
+                  className={`flex rounded-full outline-offset-2 outline-accent-900 focus-visible:outline-2 cursor-pointer w-6 h-6 grid place-items-center after:content-[''] after:transition-all after:duration-200 after:ease-(--ease-out-quint) after:w-6 after:h-6 after:rounded-full after:scale-30 after:opacity-0 after:bg-neutral-500 after:absolute after:top-0 after:left-0 after:z-[-1] relative ${
+                    showTooltip
+                      ? "after:scale-100 after:opacity-100"
+                      : "hover:after:scale-100 hover:after:opacity-100"
+                  }`}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
