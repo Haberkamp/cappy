@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   transcribe,
   canUseWhisperWeb,
@@ -15,7 +15,10 @@ import {
   DropZone,
   FileTrigger,
   Link,
+  OverlayArrow,
   Text,
+  Tooltip,
+  TooltipTrigger,
 } from "react-aria-components";
 import FileItem from "../components/FileItem";
 
@@ -31,6 +34,8 @@ const ALLOWED_FILE_TYPES = [
 ] as const;
 
 const MotionDropZone = motion.create(DropZone);
+
+const MotionTooltip = motion.create(Tooltip);
 
 export default function Home() {
   const [downloadProgress, setDownloadProgress] = useState<number | undefined>(
@@ -125,6 +130,8 @@ export default function Home() {
 
     downloadFile(blob, file.name);
   }
+
+  const [showTooltip, setShowTooltip] = useState(false);
 
   return (
     <div className="container px-4 max-w-[980px] mx-auto py-16 md:py-32 lg:py-[180px]">
@@ -330,9 +337,64 @@ export default function Home() {
           style={{ boxShadow: "0 2px 3px rgba(0, 0, 0, 0.05)" }}
         >
           {typeof downloadProgress === "number" ? (
-            <p className="md:ml-2 capped-text-body text-neutral-1200 tabular-nums">
-              Downloading AI: {downloadProgress}%
-            </p>
+            <div className="flex items-center gap-1">
+              <p className="md:ml-2 capped-text-body text-neutral-1200 tabular-nums">
+                Downloading AI: {downloadProgress}%
+              </p>
+
+              <TooltipTrigger
+                delay={0}
+                isOpen={showTooltip}
+                onOpenChange={(isOpen) => setShowTooltip(isOpen)}
+              >
+                <Button className="flex rounded-full outline-accent-900 focus-visible:outline-2 cursor-pointer w-6 h-6 grid place-items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"></path>
+                  </svg>
+                </Button>
+
+                <AnimatePresence>
+                  {showTooltip ? (
+                    <MotionTooltip
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 150,
+                        damping: 7,
+                        mass: 0.2,
+                      }}
+                      className="bg-neutral-1200 text-neutral-100 capped-text-body text-pretty py-5 px-4 rounded-md max-w-[280px]"
+                      offset={2}
+                    >
+                      <OverlayArrow>
+                        <svg
+                          className="text-neutral-1200"
+                          width={8}
+                          height={8}
+                          viewBox="0 0 8 8"
+                          fill="currentColor"
+                        >
+                          <path d="M0 0 L4 4 L8 0" />
+                        </svg>
+                      </OverlayArrow>
+
+                      <span>
+                        To create captions, we&apos;re downloading an AI model
+                        to your computer. It runs locally, so your audio stays
+                        private. This only needs to happen once.
+                      </span>
+                    </MotionTooltip>
+                  ) : null}
+                </AnimatePresence>
+              </TooltipTrigger>
+            </div>
           ) : null}
 
           {file ? (
